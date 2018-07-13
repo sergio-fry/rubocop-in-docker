@@ -15,7 +15,6 @@ script:
 
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
-  - # TODO: PUSH
+  - docker push udalov/rubocop:$VERSION
 
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker build --build-arg version=$VERSION -t udalov/rubocop:latest . ; fi
-  - # TODO: PUSH
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker build --build-arg version=$VERSION -t udalov/rubocop:latest . ; docker push udalov/rubocop:latest; fi
