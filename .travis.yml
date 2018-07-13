@@ -13,8 +13,10 @@ script:
   - export VERSION=`docker run rubocop-in-docker-dev`
   - if [ "$TRAVIS_TAG" != "" ]; then export VERSION=$TRAVIS_TAG; fi
 
+  - docker pull udalov/rubocop
+
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
+  - docker build --cache-from udalov/rubocop --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
   - docker push udalov/rubocop:$VERSION
 
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker build --build-arg version=$VERSION -t udalov/rubocop:latest . ; docker push udalov/rubocop:latest; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker build --cache-from udalov/rubocop --build-arg version=$VERSION -t udalov/rubocop:latest . ; docker push udalov/rubocop:latest; fi
