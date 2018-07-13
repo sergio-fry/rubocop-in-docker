@@ -3,9 +3,12 @@ sudo: required
 services:
   - docker
 
-script:
+before_install:
   - docker -v
 
-  - docker build -f Dockerfile.dev -t rubocop-in-docker-dev .
-  - export VERSION=`docker run rubocop-in-docker-dev`
-  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
+script:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker build -f Dockerfile.dev -t rubocop-in-docker-dev .
+    export VERSION=`docker run rubocop-in-docker-dev`
+    docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
+  fi
