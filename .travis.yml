@@ -5,3 +5,4 @@ services:
 
 script:
   - docker -v
+  - ./build-latest.sh
