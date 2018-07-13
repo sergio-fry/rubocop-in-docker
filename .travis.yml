@@ -8,8 +8,13 @@ before_install:
 
 script:
   - docker build -f Dockerfile.dev -t rubocop-in-docker-dev .
-  - export VERSION=`docker run rubocop-in-docker-dev`
 
+  # Version
+  - export VERSION=`docker run rubocop-in-docker-dev`
   - if [ "$TRAVIS_TAG" != "" ]; then export VERSION=$TRAVIS_TAG; fi
 
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -t udalov/rubocop:latest . ; fi
+  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
+  - # TODO: PUSH
+
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker build --build-arg version=$VERSION -t udalov/rubocop:latest . ; fi
+  - # TODO: PUSH
