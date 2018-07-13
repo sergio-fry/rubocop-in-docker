@@ -13,6 +13,7 @@ script:
   - export VERSION=`docker run rubocop-in-docker-dev`
   - if [ "$TRAVIS_TAG" != "" ]; then export VERSION=$TRAVIS_TAG; fi
 
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION .
   - # TODO: PUSH
 
