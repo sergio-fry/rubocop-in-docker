@@ -1,0 +1,6 @@
+FROM ruby:2.5-alpine
+RUN apk add --no-cache curl
+WORKDIR /app
+ADD latest-version.rb .
+RUN ruby latest-version.rb > version
+CMD ["cat", "version"]
