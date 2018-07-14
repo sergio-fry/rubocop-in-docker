@@ -1,7 +1,9 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.5-alpine as bundle
 RUN apk add --no-cache make g++
 ARG version
 RUN gem install rubocop -v ${version}
-RUN apk del make g++
+
+FROM ruby:2.5-alpine
 WORKDIR /app
+COPY --from=bundle /usr/local/bundle /usr/local/bundle
 CMD ["rubocop"]
