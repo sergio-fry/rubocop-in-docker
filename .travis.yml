@@ -49,7 +49,7 @@ script:
 
   - if [ "$VERSION" == "latest" ]; then 
       docker build -t udalov/rubocop:latest -f Dockerfile.$RUBY .;
-      export VERSION=`docker run -it udalov/rubocop:latest rubocop -v`;
+      export VERSION=`docker run -it udalov/rubocop:latest rubocop -v | tr -d '\r'`;
     fi
 
   - docker build --cache-from udalov/rubocop:$VERSION --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .
