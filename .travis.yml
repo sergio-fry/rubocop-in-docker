@@ -51,7 +51,9 @@ script:
       export $VERSION=`docker run -it udalov/rubocop:latest rubocop -v`;
     fi
 
-  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .;
+  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .
+
+  - docker run -v "$PWD:/app" -it udalov/rubocop:$VERSION rubocop test/test.rb
 
 
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
