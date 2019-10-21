@@ -1,4 +1,4 @@
-FROM ruby:2.5-alpine as bundle
+FROM ruby:2.5-alpine
 ARG version
 RUN apk add --no-cache make g++ && \
       gem install rubocop -v ${version} && \
