@@ -1,9 +1,8 @@
 FROM ruby:alpine as bundle
-RUN apk add --no-cache make g++
-RUN gem install rubocop
-RUN rubocop -v
+ARG version
+RUN apk add --no-cache make g++ && \
+      gem install rubocop -v ${version} && \
+      apk del make g++
 
-FROM ruby:alpine
 WORKDIR /app
-COPY --from=bundle /usr/local/bundle /usr/local/bundle
 CMD ["rubocop"]

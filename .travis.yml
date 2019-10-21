@@ -45,14 +45,16 @@ env:
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker pull udalov/rubocop:$VERSION || true
 
   - if [ "$VERSION" == "latest" ]; then 
-      docker build -t udalov/rubocop:latest -f Dockerfile.$RUBY .;
+      docker build --cache-from udalov/rubocop:$VERSION -t udalov/rubocop:latest -f Dockerfile.$RUBY .;
       export $VERSION=`docker run -it udalov/rubocop:latest rubocop -v`;
     fi
 
-  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .
+  - docker build --cache-from udalov/rubocop:$VERSION --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .
 
+  - docker run -it udalov/rubocop:$VERSION rubocop -v
   - docker run -v "$PWD:/app" -it udalov/rubocop:$VERSION rubocop test/test.rb
 
 
