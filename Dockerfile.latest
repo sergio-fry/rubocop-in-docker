@@ -1,6 +1,7 @@
 FROM ruby:alpine as bundle
 RUN apk add --no-cache make g++
 RUN gem install rubocop
+RUN rubocop -v
 
 FROM ruby:alpine
 WORKDIR /app
