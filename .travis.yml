@@ -10,4 +10,4 @@ script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.ruby-$RUBY .
 
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push udalov/rubocop:$VERSION-ruby-$RUBY; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push udalov/rubocop:$VERSION; fi
