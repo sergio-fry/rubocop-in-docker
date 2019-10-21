@@ -7,9 +7,22 @@ Use these pre-installed rubocoped builds for CI speedup.
 
 ## Usage
 
+Command line:
+
 ```bash
 $ docker run -it -v "$PWD:/app" udalov/rubocop:0.67.2 rubocop
 ```
+
+Gitlab CI:
+
+```yaml
+rubocop:
+  image: udalov/rubocop:0.67.2
+  script:
+    - rubocop
+```
+
+
 
 ## Can't see required rubocop version?
 
