@@ -49,10 +49,10 @@ script:
   - if [ "$VERSION" == "latest" ]; then 
       docker build -t udalov/rubocop:latest -f Dockerfile.$RUBY .;
       export $VERSION=`docker run -it udalov/rubocop:latest rubocop -v`;
-      docker build -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .;
-    else
-      docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .;
     fi
+
+  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .;
+
 
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
         if [ "$VERSION" == "latest" ]; then 
