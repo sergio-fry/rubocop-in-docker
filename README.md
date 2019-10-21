@@ -13,4 +13,4 @@ $ docker run -it -v "$PWD:/app" udalov/rubocop:0.67.2 rubocop
 
 ## Can't see required rubocop version?
 
-Make a pull request for [[.travis.yml]]
+Make a pull request for (.travis.yml)[.travis.yml]
