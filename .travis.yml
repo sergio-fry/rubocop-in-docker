@@ -4,6 +4,7 @@ services:
   - docker
 
 env:
+  - VERSION=latest RUBY=latest
   - VERSION=0.50.0 RUBY=ruby-2.5
   - VERSION=0.51.0 RUBY=ruby-2.5
   - VERSION=0.52.0 RUBY=ruby-2.5
@@ -41,7 +42,6 @@ env:
   - VERSION=0.73.0 RUBY=ruby-2.5
   - VERSION=0.75.0 RUBY=ruby-2.5
   - VERSION=0.75.1 RUBY=ruby-2.5
-  - VERSION=latest RUBY=latest
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
