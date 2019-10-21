@@ -4,10 +4,10 @@ services:
   - docker
 
 env:
-  - VERSION=0.67.2 RUBY_VERSION=2.5
+  - VERSION=0.67.2 RUBY=2.5
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.ruby-$RUBY_VERSION .
+  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.ruby-$RUBY .
 
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push udalov/rubocop:$VERSION-ruby-$RUBY_VERSION; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push udalov/rubocop:$VERSION-ruby-$RUBY; fi
