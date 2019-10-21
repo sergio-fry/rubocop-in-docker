@@ -1,0 +1,10 @@
+FROM ruby:2.0-alpine as bundle
+RUN apk add --no-cache make g++
+ARG version
+RUN gem install rubocop -v ${version}
+RUN rubocop -v
+
+FROM ruby:2.0-alpine
+WORKDIR /app
+COPY --from=bundle /usr/local/bundle /usr/local/bundle
+CMD ["rubocop"]
