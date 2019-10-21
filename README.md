@@ -8,5 +8,9 @@ Use these pre-installed rubocoped builds for CI speedup.
 ## Usage
 
 ```bash
-$ docker run -it -v "$PWD:/app" udalov/rubocop:$TAG rubocop
+$ docker run -it -v "$PWD:/app" udalov/rubocop:0.67.2 rubocop
 ```
+
+## Can't see required rubocop version?
+
+Make a pull request for [[.travis.yml]]
