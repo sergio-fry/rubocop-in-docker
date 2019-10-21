@@ -1,7 +1,7 @@
 FROM ruby:alpine as bundle
 ARG version
 RUN apk add --no-cache make g++ && \
-      gem install rubocop -v ${version} && \
+      gem install rubocop && \
       apk del make g++
 
 WORKDIR /app
