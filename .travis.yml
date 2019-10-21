@@ -8,6 +8,6 @@ env:
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION Dockerfile.ruby-$RUBY_VERSION .
+  - docker build --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.ruby-$RUBY_VERSION .
 
   - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push udalov/rubocop:$VERSION-ruby-$RUBY_VERSION; fi
