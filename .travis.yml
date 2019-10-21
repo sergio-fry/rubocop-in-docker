@@ -5,43 +5,43 @@ services:
 
 env:
   - VERSION=0.50.0 RUBY=ruby-2.5
-    #- VERSION=0.51.0 RUBY=ruby-2.5
-    #- VERSION=0.52.0 RUBY=ruby-2.5
-    #- VERSION=0.52.1 RUBY=ruby-2.5
-    #- VERSION=0.53.0 RUBY=ruby-2.5
-    #- VERSION=0.54.0 RUBY=ruby-2.5
-    #- VERSION=0.55.0 RUBY=ruby-2.5
-    #- VERSION=0.56.0 RUBY=ruby-2.5
-    #- VERSION=0.57.0 RUBY=ruby-2.5
-    #- VERSION=0.57.1 RUBY=ruby-2.5
-    #- VERSION=0.57.2 RUBY=ruby-2.5
-    #- VERSION=0.58.0 RUBY=ruby-2.5
-    #- VERSION=0.58.1 RUBY=ruby-2.5
-    #- VERSION=0.58.2 RUBY=ruby-2.5
-    #- VERSION=0.59.0 RUBY=ruby-2.5
-    #- VERSION=0.59.1 RUBY=ruby-2.5
-    #- VERSION=0.59.2 RUBY=ruby-2.5
-    #- VERSION=0.60.0 RUBY=ruby-2.5
-    #- VERSION=0.61.0 RUBY=ruby-2.5
-    #- VERSION=0.61.1 RUBY=ruby-2.5
-    #- VERSION=0.62.0 RUBY=ruby-2.5
-    #- VERSION=0.63.0 RUBY=ruby-2.5
-    #- VERSION=0.63.1 RUBY=ruby-2.5
-    #- VERSION=0.64.0 RUBY=ruby-2.5
-    #- VERSION=0.65.0 RUBY=ruby-2.5
-    #- VERSION=0.66.0 RUBY=ruby-2.5
-    #- VERSION=0.67.1 RUBY=ruby-2.5
-    #- VERSION=0.67.2 RUBY=ruby-2.5
-    #- VERSION=0.68.0 RUBY=ruby-2.5
-    #- VERSION=0.68.1 RUBY=ruby-2.5
-    #- VERSION=0.69.0 RUBY=ruby-2.5
-    #- VERSION=0.70.0 RUBY=ruby-2.5
-    #- VERSION=0.71.0 RUBY=ruby-2.5
-    #- VERSION=0.72.0 RUBY=ruby-2.5
-    #- VERSION=0.73.0 RUBY=ruby-2.5
-    #- VERSION=0.75.0 RUBY=ruby-2.5
-    #- VERSION=0.75.1 RUBY=ruby-2.5
-    #- VERSION=latest RUBY=latest
+  - VERSION=0.51.0 RUBY=ruby-2.5
+  - VERSION=0.52.0 RUBY=ruby-2.5
+  - VERSION=0.52.1 RUBY=ruby-2.5
+  - VERSION=0.53.0 RUBY=ruby-2.5
+  - VERSION=0.54.0 RUBY=ruby-2.5
+  - VERSION=0.55.0 RUBY=ruby-2.5
+  - VERSION=0.56.0 RUBY=ruby-2.5
+  - VERSION=0.57.0 RUBY=ruby-2.5
+  - VERSION=0.57.1 RUBY=ruby-2.5
+  - VERSION=0.57.2 RUBY=ruby-2.5
+  - VERSION=0.58.0 RUBY=ruby-2.5
+  - VERSION=0.58.1 RUBY=ruby-2.5
+  - VERSION=0.58.2 RUBY=ruby-2.5
+  - VERSION=0.59.0 RUBY=ruby-2.5
+  - VERSION=0.59.1 RUBY=ruby-2.5
+  - VERSION=0.59.2 RUBY=ruby-2.5
+  - VERSION=0.60.0 RUBY=ruby-2.5
+  - VERSION=0.61.0 RUBY=ruby-2.5
+  - VERSION=0.61.1 RUBY=ruby-2.5
+  - VERSION=0.62.0 RUBY=ruby-2.5
+  - VERSION=0.63.0 RUBY=ruby-2.5
+  - VERSION=0.63.1 RUBY=ruby-2.5
+  - VERSION=0.64.0 RUBY=ruby-2.5
+  - VERSION=0.65.0 RUBY=ruby-2.5
+  - VERSION=0.66.0 RUBY=ruby-2.5
+  - VERSION=0.67.1 RUBY=ruby-2.5
+  - VERSION=0.67.2 RUBY=ruby-2.5
+  - VERSION=0.68.0 RUBY=ruby-2.5
+  - VERSION=0.68.1 RUBY=ruby-2.5
+  - VERSION=0.69.0 RUBY=ruby-2.5
+  - VERSION=0.70.0 RUBY=ruby-2.5
+  - VERSION=0.71.0 RUBY=ruby-2.5
+  - VERSION=0.72.0 RUBY=ruby-2.5
+  - VERSION=0.73.0 RUBY=ruby-2.5
+  - VERSION=0.75.0 RUBY=ruby-2.5
+  - VERSION=0.75.1 RUBY=ruby-2.5
+  - VERSION=latest RUBY=latest
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
@@ -54,6 +54,7 @@ script:
 
   - docker build --cache-from udalov/rubocop:$VERSION --build-arg version=$VERSION -t udalov/rubocop:$VERSION -f Dockerfile.$RUBY .
 
+  - docker run -it udalov/rubocop:$VERSION rubocop -v
   - docker run -v "$PWD:/app" -it udalov/rubocop:$VERSION rubocop test/test.rb
 
 
